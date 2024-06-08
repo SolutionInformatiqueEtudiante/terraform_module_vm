@@ -1,0 +1,57 @@
+resource "vsphere_virtual_machine" "this" {
+  name             = var.name
+  annotation       = var.description
+  folder           = var.folder
+  resource_pool_id = data.vsphere_compute_cluster.this.resource_pool_id
+  datastore_id     = data.vsphere_datastore.this.id
+  num_cpus         = var.cpu
+  memory           = var.ram
+  guest_id         = data.vsphere_virtual_machine.this.guest_id
+  firmware         = data.vsphere_virtual_machine.this.firmware
+
+  dynamic "network_interface" {
+    for_each = var.network_interfaces
+    content {
+      network_id   = network_interface.value.network_id
+      adapter_type = network_interface.value.adapter_type
+    }
+  }
+
+  dynamic "disk" {
+    for_each = concat(data.vsphere_virtual_machine.this.disks, var.disks)
+    content {
+      label            = disk.value.label
+      size             = disk.value.size
+      thin_provisioned = disk.value.thin_provisioned
+      unit_number      = disk.value.unit_number
+    }
+  }
+
+  # clone {
+  #   template_uuid = data.vsphere_virtual_machine.this.id
+  #   customize {
+  #     linux_options {
+  #       host_name = each.key
+  #       domain    = each.value.network.domain
+  #     }
+
+  #     dynamic "network_interface" {
+  #       for_each = each.value.network.network_interfaces
+  #       content {
+  #         ipv4_address = network_interface.value.ipv4_address
+  #         ipv4_netmask = network_interface.value.ipv4_netmask
+  #       }
+  #     }
+  #     dns_server_list = each.value.network.dns_server_list
+  #     ipv4_gateway    = each.value.network.ipv4_gateway
+  #   }
+  # }
+
+  # lifecycle {
+  #   ignore_changes = [ept_rvi_mode, hv_mode, tools_upgrade_policy]
+  # }
+
+  # depends_on = [
+  #   resource.vsphere_folder.folder2
+  # ]
+}
