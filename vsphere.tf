@@ -18,7 +18,8 @@ resource "vsphere_virtual_machine" "this" {
   }
 
   dynamic "disk" {
-    for_each = concat(data.vsphere_virtual_machine.this.disks, var.disks)
+    # for_each = concat(data.vsphere_virtual_machine.this.disks, var.disks)
+    for_each = data.vsphere_virtual_machine.this.disks
     content {
       label            = disk.value.label
       size             = disk.value.size
