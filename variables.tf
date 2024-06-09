@@ -1,13 +1,3 @@
-variable "datacenter_name" {
-  type        = string
-  description = "Datacenter to create resources"
-}
-
-variable "datastore_name" {
-  type        = string
-  description = "Datastore to create vm"
-}
-
 variable "name" {
   type        = string
   description = "Name of the virtual machine"
@@ -65,4 +55,9 @@ variable "disks" {
   }))
   description = "Disk's parameters"
   default     = []
+}
+
+variable "datacenter_id" {
+  type        = string
+  description = "ID of the datacenter to use"
 }

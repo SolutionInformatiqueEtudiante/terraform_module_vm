@@ -52,7 +52,7 @@ resource "vsphere_virtual_machine" "this" {
   #   ignore_changes = [ept_rvi_mode, hv_mode, tools_upgrade_policy]
   # }
 
-  # depends_on = [
-  #   resource.vsphere_folder.folder2
-  # ]
+  depends_on = [
+    data.vsphere_virtual_machine.this
+  ]
 }
