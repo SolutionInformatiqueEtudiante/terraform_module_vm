@@ -15,11 +15,6 @@ variable "folder" {
   default     = null
 }
 
-variable "cluster_name" {
-  type        = string
-  description = "Cluster to create vm"
-}
-
 variable "template_name" {
   type        = string
   description = "Name of the template to use"
