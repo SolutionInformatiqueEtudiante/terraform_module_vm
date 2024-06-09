@@ -56,3 +56,8 @@ variable "datacenter_id" {
   type        = string
   description = "ID of the datacenter to use"
 }
+
+variable "resource_pool_id" {
+  type        = string
+  description = "Resource Pool ID of the resource"
+}
