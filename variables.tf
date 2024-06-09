@@ -42,7 +42,18 @@ variable "ram" {
 # }
 
 variable "network" {
-  type = any
+  type = object({
+    ipv4_gateway    = string
+    domain          = string
+    dns_server_list = list(string)
+    network_interfaces = map(object({
+      network_id   = string
+      ipv4_address = string
+      ipv4_netmask = number
+      adapter_type = string
+    }))
+  })
+  description = "Network parameters"
 }
 
 variable "disks" {
