@@ -23,13 +23,11 @@ variable "template_name" {
 variable "cpu" {
   type        = number
   description = "Numbers of CPU to use"
-  default     = 2
 }
 
 variable "ram" {
   type        = number
   description = "Numbers of RAM to use"
-  default     = 4096
 }
 
 # variable "network_interfaces" {
