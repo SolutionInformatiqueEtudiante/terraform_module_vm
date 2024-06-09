@@ -18,7 +18,6 @@ resource "vsphere_virtual_machine" "this" {
   }
 
   dynamic "disk" {
-    # for_each = concat(data.vsphere_virtual_machine.this.disks, var.disks)
     for_each = data.vsphere_virtual_machine.this.disks
     content {
       label            = disk.value.label
@@ -28,25 +27,25 @@ resource "vsphere_virtual_machine" "this" {
     }
   }
 
-  # clone {
-  #   template_uuid = data.vsphere_virtual_machine.this.id
-  #   customize {
-  #     linux_options {
-  #       host_name = each.key
-  #       domain    = each.value.network.domain
-  #     }
+  clone {
+    template_uuid = data.vsphere_virtual_machine.this.id
+    customize {
+      # linux_options {
+      #   host_name = each.key
+      #   domain    = each.value.network.domain
+      # }
 
-  #     dynamic "network_interface" {
-  #       for_each = each.value.network.network_interfaces
-  #       content {
-  #         ipv4_address = network_interface.value.ipv4_address
-  #         ipv4_netmask = network_interface.value.ipv4_netmask
-  #       }
-  #     }
-  #     dns_server_list = each.value.network.dns_server_list
-  #     ipv4_gateway    = each.value.network.ipv4_gateway
-  #   }
-  # }
+      dynamic "network_interface" {
+        for_each = var.network_interfaces
+        content {
+          ipv4_address = network_interface.value.ipv4_address
+          ipv4_netmask = network_interface.value.ipv4_netmask
+        }
+      }
+      dns_server_list = each.value.network.dns_server_list
+      ipv4_gateway    = each.value.network.ipv4_gateway
+    }
+  }
 
   # lifecycle {
   #   ignore_changes = [ept_rvi_mode, hv_mode, tools_upgrade_policy]
