@@ -61,3 +61,8 @@ variable "resource_pool_id" {
   type        = string
   description = "Resource Pool ID of the resource"
 }
+
+variable "datastore_id" {
+  type        = string
+  description = "ID of the datastore to use"
+}

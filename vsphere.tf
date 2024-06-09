@@ -2,8 +2,8 @@ resource "vsphere_virtual_machine" "this" {
   name             = var.name
   annotation       = var.description
   folder           = var.folder
-  resource_pool_id = data.vsphere_compute_cluster.this.resource_pool_id
-  datastore_id     = data.vsphere_datastore.this.id
+  resource_pool_id = var.resource_pool_id
+  datastore_id     = var.datastore_id
   num_cpus         = var.cpu
   memory           = var.ram
   guest_id         = data.vsphere_virtual_machine.this.guest_id
