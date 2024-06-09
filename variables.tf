@@ -74,5 +74,4 @@ variable "datastore_id" {
 variable "is_linux" {
   type        = bool
   description = "Set if vm is Linux machine"
-  default     = true
 }
