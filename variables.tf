@@ -70,3 +70,9 @@ variable "datastore_id" {
   type        = string
   description = "ID of the datastore to use"
 }
+
+variable "is_linux" {
+  type        = bool
+  description = "Set if vm is Linux machine"
+  default     = true
+}

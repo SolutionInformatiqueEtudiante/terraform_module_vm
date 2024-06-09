@@ -30,20 +30,27 @@ resource "vsphere_virtual_machine" "this" {
   clone {
     template_uuid = data.vsphere_virtual_machine.this.id
     customize {
+      dynamic "linux_options" {
+        for_each = var.is_linux == true ? [1] : [0]
+        content {
+          host_name = var.name
+          domain    = var.network.domain
+        }
+      }
       # linux_options {
       #   host_name = each.key
-      #   domain    = each.value.network.domain
+      #   domain    = var.network.domain
       # }
 
       dynamic "network_interface" {
-        for_each = var.network_interfaces
+        for_each = var.network.network_interfaces
         content {
           ipv4_address = network_interface.value.ipv4_address
           ipv4_netmask = network_interface.value.ipv4_netmask
         }
       }
-      dns_server_list = each.value.network.dns_server_list
-      ipv4_gateway    = each.value.network.ipv4_gateway
+      dns_server_list = var.network.dns_server_list
+      ipv4_gateway    = var.network.ipv4_gateway
     }
   }
 
