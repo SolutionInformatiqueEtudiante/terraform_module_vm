@@ -10,7 +10,7 @@ resource "vsphere_virtual_machine" "this" {
   firmware         = data.vsphere_virtual_machine.this.firmware
 
   dynamic "network_interface" {
-    for_each = var.network_interfaces
+    for_each = var.network.network_interfaces
     content {
       network_id   = network_interface.value.network_id
       adapter_type = network_interface.value.adapter_type
