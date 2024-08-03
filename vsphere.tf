@@ -38,12 +38,12 @@ resource "vsphere_virtual_machine" "this" {
         }
       }
 
-      dynamic "windows_options" {
-        for_each = var.is_linux == false ? [1] : [0]
-        content {
-          computer_name = var.name
-        }
-      }
+      # dynamic "windows_options" {
+      #   for_each = var.is_linux == false ? [1] : [0]
+      #   content {
+      #     computer_name = var.name
+      #   }
+      # }
 
       dynamic "network_interface" {
         for_each = var.network.network_interfaces
