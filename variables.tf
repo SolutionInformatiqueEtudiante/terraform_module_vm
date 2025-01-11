@@ -30,15 +30,6 @@ variable "ram" {
   description = "Numbers of RAM to use"
 }
 
-# variable "network_interfaces" {
-#   type = map(object({
-#     network_id   = string
-#     adapter_type = optional(string, "vmxnet3")
-#   }))
-#   description = "Network interface's parameters"
-#   default     = {}
-# }
-
 variable "network" {
   type = object({
     ipv4_gateway    = string
