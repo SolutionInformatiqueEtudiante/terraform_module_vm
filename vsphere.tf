@@ -18,9 +18,9 @@ resource "vsphere_virtual_machine" "this" {
   }
 
   dynamic "disk" {
-    for_each = data.vsphere_virtual_machine.this.disks
+    for_each = concat(data.vsphere_virtual_machine.this.disks, var.disks)
     content {
-      label            = disk.value.label
+      label            = "Hard disk ${disk.value.unit_number + 1}"
       size             = disk.value.size
       thin_provisioned = disk.value.thin_provisioned
       unit_number      = disk.value.unit_number
@@ -37,13 +37,6 @@ resource "vsphere_virtual_machine" "this" {
           domain    = var.network.domain
         }
       }
-
-      # dynamic "windows_options" {
-      #   for_each = var.is_linux == false ? [1] : [0]
-      #   content {
-      #     computer_name = var.name
-      #   }
-      # }
 
       dynamic "network_interface" {
         for_each = var.network.network_interfaces

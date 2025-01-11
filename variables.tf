@@ -47,7 +47,6 @@ variable "network" {
 
 variable "disks" {
   type = list(object({
-    label            = string
     size             = number
     thin_provisioned = optional(bool, true)
     unit_number      = number
