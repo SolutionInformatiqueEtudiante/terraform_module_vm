@@ -6,13 +6,11 @@ variable "name" {
 variable "description" {
   type        = string
   description = "Resource's description"
-  default     = "Created by terraform"
 }
 
 variable "folder" {
   type        = string
   description = "VirtualMachine's folder"
-  default     = null
 }
 
 variable "template_name" {
@@ -52,7 +50,7 @@ variable "disks" {
     unit_number      = number
   }))
   description = "Disk's parameters"
-  default     = []
+  # default     = []
 }
 
 variable "datacenter_id" {
