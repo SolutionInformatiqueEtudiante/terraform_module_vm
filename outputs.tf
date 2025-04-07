@@ -9,3 +9,7 @@ output "vm_cpu" {
 output "vm_memory" {
   value = vsphere_virtual_machine.this.memory
 }
+
+output "vm_name" {
+  value = vsphere_virtual_machine.this.name
+}
