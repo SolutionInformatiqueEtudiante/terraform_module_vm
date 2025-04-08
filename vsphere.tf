@@ -51,7 +51,7 @@ resource "vsphere_virtual_machine" "this" {
   }
 
   lifecycle {
-    ignore_changes = [ept_rvi_mode, hv_mode, tools_upgrade_policy]
+    ignore_changes = [ept_rvi_mode, hv_mode, tools_upgrade_policy, clone]
   }
 
   depends_on = [
