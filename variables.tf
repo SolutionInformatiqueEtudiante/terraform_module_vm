@@ -3,6 +3,12 @@ variable "name" {
   description = "Name of the virtual machine"
 }
 
+variable "warpgate_role_id" {
+  description = "Name of the project"
+  type        = string
+  default     = null
+}
+
 variable "description" {
   type        = string
   description = "Resource's description"
