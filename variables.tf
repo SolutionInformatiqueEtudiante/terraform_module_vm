@@ -3,12 +3,6 @@ variable "name" {
   description = "Name of the virtual machine"
 }
 
-variable "warpgate_role_id" {
-  description = "Name of the project"
-  type        = string
-  default     = null
-}
-
 variable "description" {
   type        = string
   description = "Resource's description"
@@ -77,4 +71,14 @@ variable "datastore_id" {
 variable "is_linux" {
   type        = bool
   description = "Set if vm is Linux machine"
+}
+
+variable "bastion_infos" {
+  type = object({
+    warpgate_role_id        = optional(string, null)
+    bastion_target_password = string
+    bastion_target_port     = number
+    bastion_target_username = string
+  })
+  description = "Infos about bastion"
 }

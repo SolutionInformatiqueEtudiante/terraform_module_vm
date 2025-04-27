@@ -4,7 +4,7 @@ data "vsphere_virtual_machine" "this" {
 }
 
 data "warpgate_role" "this" {
-  count = var.warpgate_role_id != null ? 1 : 0
+  count = var.bastion_infos.warpgate_role_id != null ? 1 : 0
 
-  id = var.warpgate_role_id
+  id = var.bastion_infos.warpgate_role_id
 }
