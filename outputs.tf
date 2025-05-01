@@ -13,3 +13,7 @@ output "vm_memory" {
 output "vm_name" {
   value = vsphere_virtual_machine.this.name
 }
+
+output "vm_storage" {
+  value = var.disks[0].size
+}
