@@ -15,5 +15,5 @@ output "vm_name" {
 }
 
 output "vm_storage" {
-  value = var.disks[0].size
+  value = try(var.disks[0].size, null)
 }
